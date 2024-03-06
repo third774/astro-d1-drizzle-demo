@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1709701891553,
+      "tag": "0000_supreme_may_parker",
+      "breakpoints": true
+    }
+  ]
+}

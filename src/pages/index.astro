@@ -1,16 +1,34 @@
 ---
+import { desc } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/d1";
+import { linkShare } from "../schema";
 
+const db = drizzle(Astro.locals.runtime.env.DB);
+
+const links = await db
+  .select()
+  .from(linkShare)
+  .orderBy(desc(linkShare.created));
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <h1>Shared Links</h1>
+    <ul>
+      {
+        links.map((link) => (
+          <li>
+            <a href={link.url}>{link.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </body>
 </html>
